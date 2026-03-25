@@ -468,13 +468,18 @@ nav {
 }
 .faq-item.open .faq-q::after { transform: rotate(45deg); }
 .faq-a {
-  display: none;
+  max-height: 0;
+  overflow: hidden;
   font-size: 15px;
   line-height: 1.75;
   color: var(--ink-muted);
+  padding-bottom: 0;
+  transition: max-height 0.3s ease, padding-bottom 0.3s ease;
+}
+.faq-item.open .faq-a {
+  max-height: 400px;
   padding-bottom: 18px;
 }
-.faq-item.open .faq-a { display: block; }
 
 /* ── FOOTER ── */
 footer {
@@ -1031,6 +1036,18 @@ function toggleFaq(el) {
   document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
   if (!wasOpen) item.classList.add('open');
 }
+// Attach touch-friendly listeners to all FAQ items on load
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.faq-q').forEach(function(q) {
+    q.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      toggleFaq(this);
+    });
+    q.addEventListener('click', function(e) {
+      toggleFaq(this);
+    });
+  });
+});
 
 // ── Month selector ───────────────────────────────────────────
 let selectedMonth = 1;
