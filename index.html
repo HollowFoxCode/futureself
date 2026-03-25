@@ -693,7 +693,7 @@ footer {
 <!-- NAV -->
 <nav>
   <span class="nav-brand">futureself.email</span>
-  <button class="nav-cta" onclick="showPage('landing')">← Back to site</button>
+  <button class="nav-cta" id="navBtn" onclick="showPage('landing')" style="visibility:hidden;">← Back to site</button>
 </nav>
 
 <!-- ══ LANDING PAGE ══ -->
@@ -872,7 +872,7 @@ footer {
 
   <footer>
     futureself.email · Letters From Your Future Self<br>
-    Questions? hello@futureself.email
+    Questions? <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1b737e7777745b7d6e6f6e697e687e777d357e767a7277">[email&#160;protected]</a>
   </footer>
 
 </div><!-- end landing page -->
@@ -1000,7 +1000,7 @@ footer {
   </div>
 </div><!-- end generator page -->
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── Page navigation ──────────────────────────────────────────
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1008,11 +1008,11 @@ function showPage(id) {
   window.scrollTo(0, 0);
   const nav = document.querySelector('nav');
   if (id === 'generator') {
-    nav.querySelector('.nav-cta').textContent = '← Back to site';
-    nav.querySelector('.nav-cta').onclick = () => showPage('landing');
+    nav.querySelector('#navBtn').style.visibility = 'visible';
+    nav.querySelector('#navBtn').textContent = '← Back to site';
+    nav.querySelector('#navBtn').onclick = () => showPage('landing');
   } else {
-    nav.querySelector('.nav-cta').textContent = 'Admin ✦';
-    nav.querySelector('.nav-cta').onclick = () => showPage('generator');
+    nav.querySelector('#navBtn').style.visibility = 'hidden';
   }
 }
 // Secret admin access — tap nav brand 5 times
@@ -1179,13 +1179,3 @@ function copyLetter() {
 function copyEmail() {
   const subject = `Letter ${selectedMonth} of 12 — from your future self`;
   const text = `Subject: ${subject}\n\nDear ${lastName},\n\n${lastLetter}\n\nWith love from ten years forward,\nYou\n\n—\nfutureself.email`;
-  navigator.clipboard.writeText(text).then(() => showStatus('Email format copied!', 'ok'));
-}
-
-function regenerate() {
-  document.getElementById('genOutput').classList.remove('show');
-  generateLetter();
-}
-</script>
-</body>
-</html>
