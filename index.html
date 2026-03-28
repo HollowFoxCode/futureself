@@ -453,10 +453,17 @@ nav {
   padding: 18px 0;
   cursor: pointer;
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: baseline;
   gap: 12px;
   user-select: none;
+  background: none;
+  border: none;
+  border-radius: 0;
+  text-align: left;
+  outline: none;
+  -webkit-appearance: none;
 }
 .faq-q::after {
   content: '+';
@@ -848,20 +855,20 @@ footer {
     <div class="section-label">Questions</div>
     <h2 class="section-title">What people ask first.</h2>
     <div class="faq">
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Is this AI-generated? How is it personal?</div>
+      <div class="faq-item" id="faq1">
+        <button class="faq-q" type="button" onclick="var i=document.getElementById('faq1');var o=i.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(x){x.classList.remove('open')});if(!o)i.classList.add('open');">Is this AI-generated? How is it personal?</button>
         <div class="faq-a">Yes — each letter is written by an AI given only your intake responses as context. It knows nothing about you except what you share, which is why the intake questions matter. The result reads like someone who has studied you carefully — because it has.</div>
       </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Do I write anything after signing up?</div>
+      <div class="faq-item" id="faq2">
+        <button class="faq-q" type="button" onclick="var i=document.getElementById('faq2');var o=i.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(x){x.classList.remove('open')});if(!o)i.classList.add('open');">Do I write anything after signing up?</button>
         <div class="faq-a">No. Complete the intake once (about 10 minutes), then receive letters for a year. Some subscribers reply to their letters — this adds richness to future ones, but it's entirely optional.</div>
       </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Is my information private?</div>
+      <div class="faq-item" id="faq3">
+        <button class="faq-q" type="button" onclick="var i=document.getElementById('faq3');var o=i.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(x){x.classList.remove('open')});if(!o)i.classList.add('open');">Is my information private?</button>
         <div class="faq-a">Completely. Your intake is used only to write your letters. It is never shared, sold, or used for any other purpose. Request deletion at any time by emailing us.</div>
       </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">How do I give this as a gift?</div>
+      <div class="faq-item" id="faq4">
+        <button class="faq-q" type="button" onclick="var i=document.getElementById('faq4');var o=i.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(x){x.classList.remove('open')});if(!o)i.classList.add('open');">How do I give this as a gift?</button>
         <div class="faq-a">Select Annual at checkout and enter the recipient's name and email. They receive a welcome email with instructions for their own private intake. You won't see their letters — the subscription belongs entirely to them.</div>
       </div>
     </div>
@@ -1036,18 +1043,7 @@ function toggleFaq(el) {
   document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
   if (!wasOpen) item.classList.add('open');
 }
-// Attach touch-friendly listeners to all FAQ items on load
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.faq-q').forEach(function(q) {
-    q.addEventListener('touchend', function(e) {
-      e.preventDefault();
-      toggleFaq(this);
-    });
-    q.addEventListener('click', function(e) {
-      toggleFaq(this);
-    });
-  });
-});
+// FAQ handled via inline onclick handlers
 
 // ── Month selector ───────────────────────────────────────────
 let selectedMonth = 1;
